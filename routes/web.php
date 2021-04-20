@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->post('survivors/{id}', 'SurvivorsController@postSurvivor');
+$router->get('survivors/{id}', 'SurvivorsController@getSurvivor');
+$router->put('survivors/{id}', 'SurvivorsController@putSurvivor');
+
+$router->post('survivors/{id}/infected', 'InfectedController@postInfected');
