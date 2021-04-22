@@ -23,7 +23,9 @@ class InfectedController extends Controller
 
             try {
 
-                $infected = Infected::create($survivor);
+                // TODO
+                // we can use firtsOrCreate
+                $infected = Infected::updateOrCreate($survivor);
 
                 if (!$setInfect = $this->setInfected($request_all['id_survivor_infected'])) {
                     return $setInfect;
@@ -32,7 +34,7 @@ class InfectedController extends Controller
                 return response()->json([
                     'status' => '1',
                     'message' => 'Created infected with success!',
-                    'data' => $infected->toArray()
+                    'data' => $infected //->toArray()
                 ]);
             } catch (Exception $e) {
                 return response()->json(
