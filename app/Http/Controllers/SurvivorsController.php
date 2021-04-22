@@ -58,7 +58,7 @@ class SurvivorsController extends Controller
     /**
      * Update survivor location
      */
-    public function putSurvivor(Request $request, $id) {
+    public function patchSurvivor(Request $request, $id) {
         $request_all = $request->all();
 
         $survivor = Survivor::findOrfail($id);

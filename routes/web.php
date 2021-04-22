@@ -19,6 +19,6 @@ $router->get('/', function () use ($router) {
 
 $router->post('survivors/{id}', 'SurvivorsController@postSurvivor');
 $router->get('survivors/{id}', 'SurvivorsController@getSurvivor');
-$router->put('survivors/{id}', 'SurvivorsController@putSurvivor');
+$router->patch('survivors/{id}', 'SurvivorsController@patchSurvivor');
 
 $router->post('survivors/{id}/infected', 'InfectedController@postInfected');
