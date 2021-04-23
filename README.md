@@ -25,3 +25,5 @@ Coleção de chamadas a API no Postman:
 
 
 Esquema do Banco de Dados - Postgres:
+
+[script_bd.sql.zip](https://github.com/guiimarques18/reev/files/6367099/script_bd.sql.zip)
