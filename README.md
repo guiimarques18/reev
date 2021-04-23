@@ -5,6 +5,9 @@
 ### Solução:
 * API REST
 * Framework Lumen (8.2.3)
+* * Após clonar o projeto executar:
+* * * composer install
+* * * php artisan cache:clear
 
 
 ### Documentação:
@@ -27,3 +30,8 @@ Coleção de chamadas a API no Postman:
 Esquema do Banco de Dados - Postgres:
 
 [script_bd.sql.zip](https://github.com/guiimarques18/reev/files/6367099/script_bd.sql.zip)
+
+### Melhorias
+* Utilizar o https://editor.swagger.io/ para melhorar a documentação da API, com os campos, models, etc.
+* Implementação dos Caso de Testes Automatizados
+* No próprio código há expressões *TODO* que podem ser melhorias de código a serem implementadas
