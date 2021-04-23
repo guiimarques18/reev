@@ -24,4 +24,4 @@ Coleção de chamadas a API no Postman:
 [Teste Reev.postman_collection.json.zip](https://github.com/guiimarques18/reev/files/6365452/Teste.Reev.postman_collection.json.zip)
 
 
-Esquema do Banco de Dados - Postgrs:
+Esquema do Banco de Dados - Postgres:
