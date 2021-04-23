@@ -105,6 +105,43 @@ class SurvivorsController extends Controller
     }
 
     /**
+     * Reports 
+     * 
+     * 1. Percentage of infected survivors.
+     * 2. Percentage of non-infected survivors.
+     * 3. Average amount of each kind of resource by survivor (e.g. 5 waters per survivor)
+     * 4. Points lost because of infected survivor.
+     */
+    public function getReports() {
+        
+        $report = array();
+
+        // 1. Percentage of infected survivors.
+        $countSurvivors = Survivor::count();
+        $countSurvivorsInfected = Survivor::where('has_infected', 1)->count();
+        $percentageInfectedSurvivors = (($countSurvivorsInfected / $countSurvivors) * 100);
+        $report['Percentage of infected survivors'] = $percentageInfectedSurvivors;
+        
+        // 2. Percentage of non-infected survivors.
+        $countNonInfected = Survivor::whereNull('has_infected')->count();
+        $percentageNonInfectedSurvivors = (($countNonInfected / $countSurvivors) * 100);
+        $report['Percentage of non-infected survivors'] = $percentageNonInfectedSurvivors;
+        
+        // 3. Average amount of each kind of resource by survivor (e.g. 5 waters per survivor)
+        $avgPerSurvivor = array();
+        $avgPerSurvivor['water'] = Inventory::avg('water');
+        $avgPerSurvivor['food'] = Inventory::avg('food');
+        $avgPerSurvivor['medication'] = Inventory::avg('medication');
+        $avgPerSurvivor['ammunition'] = Inventory::avg('ammunition');
+        $report['Average amount of each kind of resource by survivor'] = $avgPerSurvivor;
+
+        // 4. Points lost because of infected survivor
+        
+
+        return $report;
+    }
+
+    /**
      * Get Survivor info
      */
     public function getSurvivor (Request $request, $id) {
