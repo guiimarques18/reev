@@ -26,10 +26,16 @@ Coleção de chamadas a API no Postman:
 
 [Teste Reev.postman_collection.json.zip](https://github.com/guiimarques18/reev/files/6365452/Teste.Reev.postman_collection.json.zip)
 
+*Utilizar este arquivo do Postman para idenficar e utilizar a API, na versão 2.0 haverá a documentação dos endpoints no swagger para facilitação da visualização*
+
 
 Esquema do Banco de Dados - Postgres:
 
 [script_bd.sql.zip](https://github.com/guiimarques18/reev/files/6367099/script_bd.sql.zip)
+
+Arquivo *.env*
+
+Utilize este arquivo para configurar suas informações de conexão a base de dados, como host, port, database, username e password.
 
 ### Melhorias
 * Utilizar o https://editor.swagger.io/ para melhorar a documentação da API, com os campos, models, etc.
