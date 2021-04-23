@@ -52,8 +52,6 @@ class SurvivorsController extends Controller
                 return $storeInventory;
             }
 
-            // var_dump($storeInventory);
-
         } catch (Exception $e) {
             return response()->json(
                 [

@@ -18,7 +18,11 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('survivors/{id}', 'SurvivorsController@postSurvivor');
+$router->post('survivors/{id}/inventory', 'SurvivorsController@postSurvivorInventory'); // TODO
 $router->get('survivors/{id}', 'SurvivorsController@getSurvivor');
 $router->patch('survivors/{id}', 'SurvivorsController@patchSurvivor');
+$router->get('survivors/{id}/reports', 'SurvivorsController@getReports'); // TODO
 
 $router->post('survivors/{id}/infected', 'InfectedController@postInfected');
+
+$router->post('survivors/{id}/trade', 'TradeController@postTrade'); // TODO
