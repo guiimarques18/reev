@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Survivor;
+use App\Models\Inventory;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -37,11 +38,22 @@ class SurvivorsController extends Controller
         try {
             $survivor = Survivor::create($request_all);
 
-            return response()->json([
-                'status' => '1',
-                'message' => 'Created survivor with success!',
-                'data' => $survivor->toArray()
-            ]);
+            $request_all['inventory']['id_survivors'] = $survivor->id;
+
+            $storeInventory = $this->storeInventory($request_all['inventory']);
+
+            if ($storeInventory === true) {
+                return response()->json([
+                    'status' => '1',
+                    'message' => 'Created survivor with success!',
+                    'data' => $survivor->toArray()
+                ]);
+            } else {
+                return $storeInventory;
+            }
+
+            // var_dump($storeInventory);
+
         } catch (Exception $e) {
             return response()->json(
                 [
@@ -122,6 +134,18 @@ class SurvivorsController extends Controller
             );
         }
 
+    }
+
+    /**
+     * Store Inventory
+     */
+    private function storeInventory($inventory) {
+        try {
+            $inventory = Inventory::create($inventory);
+            return true;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
     
 }
