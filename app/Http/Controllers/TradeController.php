@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Survivor;
 use App\Models\Inventory;
+use App\Models\Trade;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -33,20 +34,22 @@ class TradeController extends Controller
         $itensToTradeOffer = $request_all['offer'];
         $itensToTradeReceiving = $request_all['receiving'];
 
-        $pointsToTradeOffer = $this->calculateItensPoints($itensToTradeOffer);
-        $pointsToTradeReceiving = $this->calculateItensPoints($itensToTradeReceiving);
+        $trade = new Trade();
+
+        $pointsToTradeOffer = $trade->calculateItensPoints($itensToTradeOffer);
+        $pointsToTradeReceiving = $trade->calculateItensPoints($itensToTradeReceiving);
 
         if ($pointsToTradeOffer == $pointsToTradeReceiving) {
 
             // add
-            $itens = $this->getItens($request_all['trade_with']);
+            $itens = $trade->getItens($request_all['trade_with']);
             $sums = array();
             foreach (array_keys($itensToTradeReceiving + $itens) as $key) {
                 $sums[$key] = (isset($itensToTradeReceiving[$key]) ? $itensToTradeReceiving[$key] : 0) + (isset($itens[$key]) ? $itens[$key] : 0);
             }
 
             // rem
-            $itens = $this->getItens($id);
+            $itens = $trade->getItens($id);
             $subs = array();
             foreach (array_keys($itensToTradeOffer + $itens) as $key) {
                 $subs[$key] = (isset($itens[$key]) ? $itens[$key] : 0) - (isset($itensToTradeOffer[$key]) ? $itensToTradeOffer[$key] : 0);
@@ -88,42 +91,5 @@ class TradeController extends Controller
             ]);
         }
     }
-
-    /**
-     * Search itens of Survivor to tradeOf
-     * 
-     * return @listItens
-     */
-    private function getItens($id) {
-        $itens = Inventory::where('id_survivors', $id)->get()->toArray();
-        $itens = $itens[0];
-
-        $itens['inventory']['water'] = $itens['water'];
-        $itens['inventory']['food'] = $itens['food'];
-        $itens['inventory']['medication'] = $itens['medication'];
-        $itens['inventory']['ammunition'] = $itens['ammunition'];
-
-        return $itens['inventory'];
-    }
-
-    /**
-     * Calculate points of list itens
-     * 
-     * return @numberOfPoints
-     */
-    private function calculateItensPoints($itens) {
-        $pointsBase = array(
-            'water' => 4,
-            'food' => 3,
-            'medication' => 2,
-            'ammunition' => 1,
-        );
-
-        return $pointsBase['water'] * $itens['water']
-                + $pointsBase['food'] * $itens['food']
-                + $pointsBase['medication'] * $itens['medication']
-                + $pointsBase['ammunition'] * $itens['ammunition']
-            ;
-
-    }
+    
 }
