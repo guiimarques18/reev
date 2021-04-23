@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Survivor;
 use App\Models\Inventory;
+use App\Models\Trade;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -136,6 +137,15 @@ class SurvivorsController extends Controller
         $report['Average amount of each kind of resource by survivor'] = $avgPerSurvivor;
 
         // 4. Points lost because of infected survivor
+        $trade = new Trade();
+        $getSurvivorsInfected = Survivor::select('id')->where('has_infected', 1)->get();
+        $pointsLose = 0;
+        foreach ($getSurvivorsInfected as $idSurvivorsInfected) {
+            // var_dump($idSurvivorsInfected->id);
+            $itens = $trade->getItens($idSurvivorsInfected->id);
+            $pointsLose += $trade->calculateItensPoints($itens);
+        }
+        $report['Points lost because of infected survivor'] = $pointsLose;
         
 
         return $report;
