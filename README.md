@@ -24,7 +24,7 @@
 
 **Coleção de chamadas a API no Postman**:
 
-[Teste Reev.postman_collection.json.zip](https://github.com/guiimarques18/reev/files/6365452/Teste.Reev.postman_collection.json.zip)
+[Teste Reev.postman_collection.json.zip](https://github.com/guiimarques18/reev/files/6367456/Teste.Reev.postman_collection.json.zip)
 
 *Utilizar este arquivo do Postman para idenficar e utilizar a API, na versão 2.0 haverá a documentação dos endpoints no swagger para facilitação da visualização*
 
